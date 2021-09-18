@@ -1,0 +1,61 @@
+# Core Discord Bot v1
+
+- [x] Database Support
+    - [x] Server Settings
+        - [x] Log Channels
+            - [x] Mod Log
+            - [x] Message Log
+            - [x] Invite Log
+            - [x] Join & Leave Log
+        - [x] Ticket Category
+        - [x] Moderator Roles
+        - [x] Admin Roles
+        - [x] Mute Role
+    - [x] Modules
+        - [x] Security
+        - [x] Moderation
+        - [x] Auto-Mod
+        - [x] Audit Log
+        - [x] Tickets
+    - [x] Punishments
+        - [x] Guild
+        - [x] User
+        - [x] Type
+        - [x] Active
+        - [x] Expiration
+        - [x] Reason
+
+- [] Different Modules
+    - [] Security Module
+        - [] Alt Checker
+        - [] Anti Raid
+        - [] Captcha Check
+    - [x] Moderation Module
+        - [x] Warn Command
+        - [x] Mute Command
+        - [x] Kick Command
+        - [x] Ban Command
+        - [x] Cases Command
+            - [x] User Lookup
+            - [x] Detailed Case View
+        - [x] Lock Command
+        - [x] Slowmode Command
+        - [x] Purge Command
+        - [] Nickname Command //TODO Later
+    - [] Auto Moderator Module -> Week after next
+        - [] Automatic Punishments (see Database)
+        - [] Chat Filter
+        - [] Username Filter
+        - [] Ping Filter
+        - [] Spam Filter
+        - [] Invite / Link Filter
+    - [] Audit Logs Module -> Next Week
+        - [] Mod Logs
+        - [] Message Logs
+        - [] Invite Logs
+        - [] Join & Leave Logs
+    - [] Tickets Module -> This Weekend
+        - [] Open Ticket Button
+        - [] Close Ticket Button
+        - [] Claim Ticket Button
+        - [] Transscripts
