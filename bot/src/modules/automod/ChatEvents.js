@@ -65,5 +65,5 @@ function addPunishment(user, message, type, punishment) {
         reason: punishmentEmbed.fields[0].value
     })
 
-    return message.channel.send({embeds: [punishmentEmbed]})
+    return message.channel.send({embeds: [punishmentEmbed]});
 }
