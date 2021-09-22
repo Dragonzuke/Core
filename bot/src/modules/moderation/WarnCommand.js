@@ -1,15 +1,15 @@
 const { MessageEmbed, Message } = require('discord.js');
-const BaseSlashCommand = require('../../../utils/structures/BaseSlashCommand');
-const modules = require('../../../database/Modules');
-const auditLogs = require('../../../database/ModuleSettings');
-const punishments = require('../../../database/Punishments');
+const BaseSlashCommand = require('../../utils/structures/BaseSlashCommand');
+const modules = require('../../database/Modules');
+const auditLogs = require('../../database/ModuleSettings');
+const punishments = require('../../database/Punishments');
 
 module.exports = class TestCommand extends BaseSlashCommand{
   constructor() {
-    super('kick', 'Kick a user', "", [
+    super('warn', 'Warn a user', "", [
       {
         name: "user",
-        description: "Pick a user to kick",
+        description: "Pick a user to warn",
         required: true,
         type: "USER"
       },
@@ -52,7 +52,7 @@ module.exports = class TestCommand extends BaseSlashCommand{
       guild_id: guild.id,
       user_id: user,
       staff_id: interaction.member.id,
-      type: "kick",
+      type: "warning",
       active: true,
       expiration: null,
       reason: message,
@@ -61,16 +61,16 @@ module.exports = class TestCommand extends BaseSlashCommand{
 
     const warnEmbedChannel = new MessageEmbed()
         .setColor("#2f3136")
-        .setDescription(`${guild.members.cache.get(user)} has been kicked`)
-        .addField("Reason", `${message ? message : `Kicked by ${interaction.member}`}`);
+        .setDescription(`${guild.members.cache.get(user)} has been warned`)
+        .addField("Reason", `${message ? message : `Warned by ${interaction.member}`}`);
 
-    messageChannel.send({embeds: [warnEmbedChannel]}).then(() => interaction.reply({ content: `Successfully kicked ${guild.members.cache.get(user)}`, ephemeral: true}));
+    messageChannel.send({embeds: [warnEmbedChannel]}).then(() => interaction.reply({ content: `Successfully warned ${guild.members.cache.get(user)}`, ephemeral: true}));
 
     if(logs.mod_log_enabled && logChannel) {
       let logEmbed = new MessageEmbed()
         .setAuthor(`${guild.members.cache.get(user).user.tag} | Case #${newPunishment.getDataValue("case_number")}`)
-        .setDescription(`A kick has been issues by ${member}`)
-        .addField(`Reason`, `${message ? message : `Kicked by ${interaction.member}`}`, true)
+        .setDescription(`A warning has been issues by ${member}`)
+        .addField(`Reason`, `${message ? message : `Warned by ${interaction.member}`}`, true)
         .addField(`Active`, `${newPunishment.getDataValue("active")}`, true)
         .addField(`Expiration`, newPunishment.getDataValue("expiration") ? newPunishment.getDataValue("expiration") : "∞", true)
         .setColor(client.hex_color);
@@ -78,7 +78,6 @@ module.exports = class TestCommand extends BaseSlashCommand{
       if(proof) logEmbed.setImage(proof);
 
       logChannel.send({embeds: [logEmbed]});
-      member.kick({reason: message});
     }
   }
 }

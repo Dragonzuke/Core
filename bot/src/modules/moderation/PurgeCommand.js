@@ -1,6 +1,5 @@
 const { MessageEmbed, Message } = require('discord.js');
-const BaseSlashCommand = require('../../../utils/structures/BaseSlashCommand');
-const settings = require('../../../database/Settings');
+const BaseSlashCommand = require('../../utils/structures/BaseSlashCommand');
 
 module.exports = class TestCommand extends BaseSlashCommand{
   constructor() {

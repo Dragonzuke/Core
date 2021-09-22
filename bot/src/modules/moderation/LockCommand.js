@@ -1,13 +1,14 @@
 const { MessageEmbed, Message } = require('discord.js');
-const BaseSlashCommand = require('../../../utils/structures/BaseSlashCommand');
-const settings = require('../../../database/Settings');
+const BaseSlashCommand = require('../../utils/structures/BaseSlashCommand');
+const settings = require('../../database/Settings');
+
 
 module.exports = class TestCommand extends BaseSlashCommand{
   constructor() {
-    super('unlock', 'Unlock a channel', "", [
+    super('lock', 'Lock a channel', "", [
       {
         name: "channel",
-        description: "Select a channel to unlock",
+        description: "Select a channel to lock",
         required: false,
         type: "CHANNEL"
       },
@@ -31,8 +32,8 @@ module.exports = class TestCommand extends BaseSlashCommand{
     let memberRole = guild.roles.cache.get(guildData.member_role);
     if(!memberRole) memberRole = guild.roles.everyone;
 
-    guildChannel.send(`<:blurplelock:884557462928240681> Channel unlocked.`);
-    guildChannel.permissionOverwrites.edit(memberRole, { SEND_MESSAGES: null });
-    interaction.reply(`Unlocked the channel ${guildChannel}`);
+    guildChannel.send(`<:blurplelock:884557462928240681> Channel locked.`);
+    guildChannel.permissionOverwrites.edit(memberRole, { SEND_MESSAGES: false });
+    interaction.reply(`Locked the channel ${guildChannel}`);
   }
 }

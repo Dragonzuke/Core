@@ -1,5 +1,15 @@
 # Core Discord Bot v1
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Key:
+[x] => Completed
+[-] => Partially Completed
+[!] => Important to work on
+[B] => Bug Report
+[]  => Not Completed
+[NAME] => Inserted name is working on it
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 - [x] Database Support
     - [x] Server Settings
         - [x] Log Channels
@@ -41,10 +51,9 @@
         - [x] Lock Command
         - [x] Slowmode Command
         - [x] Purge Command
-        - [] Nickname Command //TODO Later
     - [] Auto Moderator Module -> Week after next
         - [] Automatic Punishments (see Database)
-        - [] Chat Filter
+        - [-] Chat Filter
         - [] Username Filter
         - [] Ping Filter
         - [] Spam Filter
@@ -59,3 +68,12 @@
         - [] Close Ticket Button
         - [] Claim Ticket Button
         - [] Transscripts
+
+- [] Moderator System
+    Make a system where server admins are able
+    to add roles to a list, and those roles
+    will have moderation powers throughout the
+    bot.
+- [] Admin System
+    Same with Moderator system, but give access
+    to more commands and permissions.

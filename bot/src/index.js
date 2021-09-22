@@ -38,9 +38,10 @@ coreDatabase.authenticate().then(() => {
   client.events = new Map();
   client.registerSlashCommands = [];
   client.hex_color = "#0081b5";
-  await registerSlashCommands(client, '../modules/moderation/commands');
+  await registerSlashCommands(client, '../modules/moderation');
   await registerSlashCommands(client, '../commands');
   await registerEvents(client, '../events');
+  await registerEvents(client, '../modules/automod');
   await client.login(config.token);
 })();
 
