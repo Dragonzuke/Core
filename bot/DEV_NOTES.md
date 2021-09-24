@@ -6,6 +6,7 @@ Key:
 [-] => Partially Completed
 [!] => Important to work on
 [B] => Bug Report
+[] => Testing needs to be completed.
 []  => Not Completed
 [NAME] => Inserted name is working on it
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -39,6 +40,7 @@ Key:
     - [] Security Module
         - [] Alt Checker
         - [] Anti Raid
+            - [] If people join rapidly on 1 invite, delete it.
         - [] Captcha Check
     - [x] Moderation Module
         - [x] Warn Command
@@ -52,12 +54,11 @@ Key:
         - [x] Slowmode Command
         - [x] Purge Command
     - [] Auto Moderator Module -> Week after next
-        - [] Automatic Punishments (see Database)
-        - [-] Chat Filter
-        - [] Username Filter
-        - [] Ping Filter
-        - [] Spam Filter
-        - [] Invite / Link Filter
+        - [xT] Chat Filter
+        - [] Username Filter // Figure out better way to do this
+        - [xT] Ping Filter
+        - [-T] Spam Filter
+        - [] Invite / Link Filter // Figure out better way to do this
     - [] Audit Logs Module -> Next Week
         - [] Mod Logs
         - [] Message Logs

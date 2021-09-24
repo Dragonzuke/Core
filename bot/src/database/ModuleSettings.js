@@ -7,10 +7,8 @@ module.exports = class Case extends Model {
             
             security_days: { type: DataTypes.INTEGER },
 
-            warning_to_next: { type: DataTypes.INTEGER },
-            mute_to_next: { type: DataTypes.INTEGER },
-            kick_to_next: { type: DataTypes.INTEGER },
-            tempban_to_next: { type: DataTypes.INTEGER },
+            mute_duration: { type: DataTypes.INTEGER },
+            ban_duration: { type: DataTypes.INTEGER },
 
             chat_filter_enabled: { type: DataTypes.BOOLEAN },
             chat_filter: { type: DataTypes.STRING },
@@ -20,6 +18,7 @@ module.exports = class Case extends Model {
             ping_filter_punishment: { type: DataTypes.STRING },
             spam_filter_enabled: { type: DataTypes.BOOLEAN },
             number_of_messages_allowed: { type: DataTypes.INTEGER },
+            time_between_messages: { type: DataTypes.INTEGER },
             spam_filter_punishment: { type: DataTypes.STRING },
             link_filter_enabled: { type: DataTypes.BOOLEAN },
             link_whitelist: { type: DataTypes.STRING },
