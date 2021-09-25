@@ -54,10 +54,10 @@ Key:
         - [x] Slowmode Command
         - [x] Purge Command
     - [] Auto Moderator Module -> Week after next
-        - [xT] Chat Filter
+        - [x] Chat Filter
         - [] Username Filter // Figure out better way to do this
-        - [xT] Ping Filter
-        - [-T] Spam Filter
+        - [x] Ping Filter
+        - [x] Spam Filter
         - [] Invite / Link Filter // Figure out better way to do this
     - [] Audit Logs Module -> Next Week
         - [] Mod Logs

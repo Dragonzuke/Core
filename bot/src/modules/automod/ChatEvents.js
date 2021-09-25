@@ -3,13 +3,13 @@ const BaseEvent = require('../../utils/structures/BaseEvent');
 const punishments = require('../../database/Punishments');
 const moduleSettings = require('../../database/ModuleSettings');
 const modules = require('../../database/Modules');
-const { MessageEmbed } = require('discord.js');
-
+const { MessageEmbed, UserManager } = require('discord.js');
 module.exports = class ReadyEvent extends BaseEvent {
   constructor() {
     super('messageCreate');
   }
   async run (client, message) {
+      if(message.author.bot) return;
     let module = await modules.findOne({where: {guild_id: message.guild.id}});
     if(!module.automod) return;
 
@@ -30,26 +30,29 @@ module.exports = class ReadyEvent extends BaseEvent {
     }
 
     //* Ping Filter
-    if(settings.ping_filter_enabled && message.mentions.members.size > settings.number_of_pings_allowed) {
+    if(settings.ping_filter_enabled && message.mentions.users.size > settings.number_of_pings_allowed) {
         addPunishment(message.member, message, "ping_filter", settings.chat_filter_punishment,
             settings.chat_filter_punishment === "mute" ? settings.mute_duration : settings.chat_filter_punishment === "ban" ? settings.ban_duration : null)
     }
 
     //* Spam Filter
-    //TODO Test this and see what collected logs out.
     if(settings.spam_filter_enabled) {
         let filter = msg => { return msg.author == message.author; }
 
-        message.channel.awaitMessages(filter, {
-            maxMatches: settings.number_of_messages_allowed,
+        message.channel.awaitMessages({
+            filter,
+            max: settings.number_of_messages_allowed,
             time: settings.time_between_messages * 1000
         }).then(collected => {
-            console.log(collected);
-        })
+            if(collected.size < settings.number_of_messages_allowed) return;
+            collected.clear();
+            addPunishment(message.member, message, "spam_filter", settings.spam_filter_punishment,
+                settings.spam_filter_punishment === "mute" ? settings.mute_duration : settings.chat_filter_punishment === "ban" ? settings.ban_duration : null);
+        });
     }
 
     //* Link Filter
-    
+
   }
 }
 
@@ -59,23 +62,20 @@ function addPunishment(user, message, type, punishment, time) {
         .setDescription(`${user} has been ${punishment}ed`);
 
     let punishmentType;
-    let punishmentActive;
+    let punishmentActive = time ? true : punishment ? "warn" || "kick" ? true : false : false;
     let epochTime;
 
     switch(punishment) {
-        case "warn": punishmentType = 'warning'
-        case "kick": punishmentType = 'kick'
-        case "mute": punishmentType = 'mute'
-        case "ban": punishmentType = 'ban'
+        case "warn": punishmentType = 'warning'; break;
+        case "kick": punishmentType = 'kick'; break;
+        case "mute": punishmentType = 'mute'; break;
+        case "ban": punishmentType = 'ban'; break;
     }
 
     switch(type) {
-        case "chat_filter":
-            punishmentEmbed.addField(`Reason`, `Bad language use.`);
-            punishmentActive = true;
-        case "ping_filter":
-            punishmentEmbed.addField(`Reason`, `Too many pings`);
-            punishmentActive = true;
+        case "chat_filter": punishmentEmbed.addField(`Reason`, `Bad language use.`); break;
+        case "ping_filter": punishmentEmbed.addField(`Reason`, `Too many pings`); break;
+        case "spam_filter": punishmentEmbed.addField(`Reason`, `Too many messages too fast!`); break;
     }
 
     if(time) {
