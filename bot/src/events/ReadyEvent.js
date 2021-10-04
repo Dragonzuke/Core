@@ -15,7 +15,11 @@ module.exports = class ReadyEvent extends BaseEvent {
       url: "https://www.twitch.tv/devzuke"
     });
 
-    for(let cmd of client.registerSlashCommands) { await client.guilds.cache.get("880200519602278441").commands.create(cmd); }
+    for(let cmd of client.registerSlashCommands) { 
+      //await client.application?.commands.create(cmd);
+      await client.guilds.cache.get("880200519602278441").commands.create(cmd).then((command) => command.delete().then(console.log("Command deleted.")));
+      //console.log(client.application?.commands);
+    }
 
     let now;
 
